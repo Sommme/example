@@ -18,8 +18,16 @@ Route::get('/', function () {
 });
 
 
-Route::get('/exhibitslist', function () {
-    return view('exhibitslist');
+Route::get('/exhibitions', function () {
+    return view('exhibitions');
+});
+
+Route::get('/exhibits', function () {
+    return view('exhibits');
+});
+
+Route::get('/contacts', function () {
+    return view('contacts');
 });
 
 Route::get('/authorization', function () {

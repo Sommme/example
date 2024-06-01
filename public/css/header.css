@@ -1,0 +1,34 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    padding: 10px 40px;
+    background-color: rgb(62, 62, 62);
+
+    text-transform: uppercase;
+}
+
+header .logo img {
+    height: 60px;
+    width: auto;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.menu a,
+.account-actions a {
+    text-decoration: none;
+    color: beige;
+}
+
+.menu a:hover,
+.account-actions a:hover {
+    color: white;
+}
