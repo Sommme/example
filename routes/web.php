@@ -26,6 +26,10 @@ Route::get('/exhibits', function () {
     return view('exhibits');
 });
 
+Route::get('/my_tickets', function () {
+    return view('my_tickets');
+});
+
 Route::get('/contacts', function () {
     return view('contacts');
 });

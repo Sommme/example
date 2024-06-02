@@ -4,13 +4,19 @@
 
 @section('content')
 
-    <h1>The Best Museum Of The World</h1>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat, sequi voluptas omnis repellat cumque hic
-        laboriosam alias mollitia, vero doloremque excepturi odio itaque rerum architecto corporis adipisci, voluptates
-        culpa est.</p>
+    <link href="{{ asset('css/image-cover.css?v=') . time() }}" rel="stylesheet">
+    <link href="{{ asset('css/welcome.css?v=') . time() }}" rel="stylesheet">
 
-    {{-- <div>
-        <img src="{{ asset('assets/images/Frame 5.png') }}" alt="">
-    </div> --}}
+
+    <div class="main-exhibition">
+        <div class="cover">
+            <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="image">
+        </div>
+        <h1>Название</h1>
+        <p>Статус</p>
+        <p>Место проведения</p>
+        <p>Место проведения</p>
+        <a href="#">Купить билет</a>
+    </div>
 
 @endsection

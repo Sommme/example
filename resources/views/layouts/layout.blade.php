@@ -36,6 +36,9 @@
             <a href="/exhibits" class="">
                 exhibits
             </a>
+            <a href="/my_tickets" class="">
+                my tickets
+            </a>
             <a href="/contacts" class="">
                 contacts
             </a>
@@ -73,10 +76,7 @@
     @yield('content')
 
     <footer>
-        {{-- <div class="site-data">
-            <p>© 2024 Некоммерческий проект «Агрегатор ваканнсий»</p>
-            <p>design by <span>Vladislav Melnichuk</span></p>
-        </div> --}}
+        <p>Footer</p>
     </footer>
 
 </body>

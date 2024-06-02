@@ -42,9 +42,14 @@ a {
     color: #F6F6EC;
 }
 
+.menu a:hover,
+.account-actions a:hover {
+    color: #B34030;
+}
+
 .account-actions {
     padding: 10px 20px;
-    border: 1px solid #F6F6EC;
+    border: 2px solid #F6F6EC;
 }
 
 .account-actions:hover {

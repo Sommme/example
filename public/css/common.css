@@ -1,8 +1,8 @@
 body {
-    width: 100%;
+    /* width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; */
     background-color: #F6F6EC;
 }
 
@@ -19,4 +19,26 @@ h3 {
     font-size: 128px;
     font-weight: 700;
     font-family: "Unbounded", serif;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+}
+
+footer {
+    margin-top: auto;
+    align-self: flex-end;
+    justify-content: flex-end;
+
+    width: 100%;
+    height: 300px;
+    bottom: 0;
+
+    background-color: #12130D;
+    color: #F6F6EC;
 }
