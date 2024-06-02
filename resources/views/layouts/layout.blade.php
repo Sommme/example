@@ -10,17 +10,21 @@
     <link href="{{ asset('css/common.css?v=') . time() }}" rel="stylesheet">
     <link href="{{ asset('css/header.css?v=') . time() }}" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&family=Unbounded:wght@200..900"
+        rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
 
     <header>
-        <div class="logo">
-            <a href="/">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
-            </a>
-        </div>
+        <a class="logo" href="/">
+            <img src="{{ asset('assets/logo/logo.svg') }}" alt="logo">
+            museum
+        </a>
 
         <div class="menu">
             <a href="/" class="">
@@ -37,11 +41,9 @@
             </a>
         </div>
 
-        <div class="account-actions">
-            <a href="/authorization" class="">
-                sign in
-            </a>
-        </div>
+        <a class="account-actions" href="/authorization">
+            sign in
+        </a>
 
         {{-- <div class="menu">
             @auth
