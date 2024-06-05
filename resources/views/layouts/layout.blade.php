@@ -36,11 +36,11 @@
             <a href="/exhibits" class="">
                 exhibits
             </a>
-            <a href="/my_tickets" class="">
-                my tickets
-            </a>
             <a href="/contacts" class="">
                 contacts
+            </a>
+            <a href="/my_tickets" class="">
+                my tickets
             </a>
         </div>
 
