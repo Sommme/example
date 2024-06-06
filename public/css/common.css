@@ -16,18 +16,29 @@ p {
 h1,
 h2,
 h3 {
-    font-size: 128px;
     font-weight: 700;
     font-family: "Unbounded", serif;
 }
+
+h1 {
+    font-size: 128px;
+}
+
+h2 {
+    font-size: 64px;
+}
+
+h3 {
+    font-size: 32px;
+}
+
 
 .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    height: 100%;
+    gap: 50px;
 }
 
 footer {

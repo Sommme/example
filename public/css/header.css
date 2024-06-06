@@ -50,6 +50,7 @@ a {
 .account-actions {
     padding: 10px 20px;
     border: 2px solid #F6F6EC;
+    border-radius: 8px;
 }
 
 .account-actions:hover {
