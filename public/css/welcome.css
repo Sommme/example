@@ -1,5 +1,4 @@
 .main-exhibition {
-    padding: 40px;
     display: flex;
     justify-content: center;
 }
@@ -79,7 +78,6 @@
 
 
 .exhibitions {
-    padding: 40px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -146,10 +144,9 @@ h3 {
 }
 
 .exhibitions {
-    padding: 40px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
 }
 
 .exhibitions .cover {
@@ -168,7 +165,6 @@ h3 {
 .controlls {
     display: flex;
     gap: 10px;
-    padding: 40px;
 }
 
 .filters {
@@ -206,6 +202,7 @@ h3 {
 }
 
 .page {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -216,8 +213,15 @@ h3 {
     background-color: #12130D;
     color: #fff;
     font-family: "Golos Text", serif;
+    font-weight: 500;
 
     border-radius: 10px;
+}
+
+.page:hover {
+    background-color: #ff5722;
+    border: none;
+    color: #12130D;
 }
 
 .swipe {
