@@ -11,3 +11,13 @@
 .btn:hover {
     background-color: #181913;
 }
+
+.o-btn {
+    padding: 10px 20px;
+    border: 2px solid #F6F6EC;
+    border-radius: 8px;
+}
+
+.o-btn:hover {
+    background-color: #181913;
+}

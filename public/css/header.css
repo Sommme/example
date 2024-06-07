@@ -42,17 +42,11 @@ a {
     color: #F6F6EC;
 }
 
-.menu a:hover,
-.account-actions a:hover {
+.menu a:hover {
     color: #ff5722;
 }
 
 .account-actions {
-    padding: 10px 20px;
-    border: 2px solid #F6F6EC;
-    border-radius: 8px;
-}
-
-.account-actions:hover {
-    background-color: #181913;
+    display: flex;
+    gap: 10px;
 }

@@ -1,13 +1,4 @@
-.content {
-    gap: 40px;
-}
-
-.forms-controlls {
-    display: flex;
-    gap: 10px;
-}
-
-/* .form-tap {
+.form-tap {
     cursor: pointer;
     padding: 10px;
     color: rgb(110, 110, 110);
@@ -15,27 +6,9 @@
 
 .form-tap:hover {
     color: #181913;
-} */
-
-.choice p {
-    color: #181913;
-    position: relative;
-    /* Добавьте позиционирование для родительского элемента */
 }
 
-.choice p::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    /* Расположение линии под текстом */
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #ff5722;
-    border-radius: 999px;
-}
-
-/* form {
+form {
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -107,4 +80,4 @@ form button:hover {
 .error-text {
     color: red;
     font-size: 12px;
-} */
+}

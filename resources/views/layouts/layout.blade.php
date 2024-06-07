@@ -7,6 +7,7 @@
     <title>@yield('title')</title>
 
     <link href="{{ asset('css/clear.css?v=') . time() }}" rel="stylesheet">
+    <link href="{{ asset('css/custom-btn.css?v=') . time() }}" rel="stylesheet">
     <link href="{{ asset('css/common.css?v=') . time() }}" rel="stylesheet">
     <link href="{{ asset('css/header.css?v=') . time() }}" rel="stylesheet">
 
@@ -44,33 +45,17 @@
             </a>
         </div>
 
-        <a class="account-actions" href="/authorization">
-            sign in
-        </a>
-
-        {{-- <div class="menu">
+        <div class="account-actions">
             @auth
-                @if (auth()->user()->hasRole(''))
-                    <a href="/welcome" class="">
-                        home
-                    </a>
-                    <a href="/exhibitions" class="">
-                        exhibitions
-                    </a>
-                @elseif(auth()->user()->hasRole(''))
-                    <a href="/exhibits" class="">
-                        exhibits
-                    </a>
-                    <a href="/contacts" class="">
-                        contacts
-                    </a>
-                @endif
+                <p>{{ Auth::user()->name }}</p>
+                <a href="/logout" class="o-btn">Sign Out</a>
             @endauth
 
             @guest
-                <a href="/login" class="">войти</a>
+                <a href="/login" class="o-btn">Sign In</a>
             @endguest
-        </div> --}}
+        </div>
+
     </header>
 
     @yield('content')
