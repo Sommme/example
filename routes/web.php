@@ -38,3 +38,18 @@ Route::get('/authorization', function () {
     return view('authorization');
 });
 
+Route::get('/exhibitions_curator', function () {
+    return view('exhibitions_curator');
+});
+
+Route::get('/exhibitions_curator_add', function () {
+    return view('exhibitions_curator_add');
+});
+
+Route::get('/one_exhibits', function () {
+    return view('one_exhibits');
+});
+
+Route::get('/one_exhibitions', function () {
+    return view('one_exhibitions');
+});
