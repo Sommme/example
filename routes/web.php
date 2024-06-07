@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ExhibitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,17 +35,33 @@ Route::post('/login/confirm_register', [AuthController::class, 'register_confirm
 
 // Группа маршрутов для роли "куратор"
 Route::group(['middleware' => ['auth', 'role:curator']], function () {
-    // Route::get('/curator-dashboard', function () {
-    //     return view('curator.dashboard');
-    // });
-    // Другие маршруты для куратора
+    Route::get('/exhibitions_curator', function () {
+        return view('exhibitions_curator');
+    });
+    
+    Route::get('/exhibitions_curator_add', function () {
+        return view('exhibitions_curator_add');
+    });
+    
+    Route::get('/exhibits_curator_add', function () {
+        return view('exhibits_curator_add');
+    })->name('exhibits_curator_add.index');
+    
+    Route::post('/exhibits_curator_add', [ExhibitController::class, 'store'])->name('exhibits_curator_add.store');
+    
 });
 
 // Группа маршрутов для роли "посетитель"
 Route::group(['middleware' => ['auth', 'role:visitor']], function () {
-    // Route::get('/my_tickets', function () {
-    //     return view('my_tickets');
-    // });
+    Route::get('/tickets', function () {
+        return view('tickets');
+    });
+
+    Route::get('/bot_settings', function () {
+        return view('bot_settings');
+    });
+    
+
 });
 
 Route::get('/exhibitions', function () {
@@ -55,37 +72,27 @@ Route::get('/exhibits', function () {
     return view('exhibits');
 });
 
-Route::get('/my_tickets', function () {
-    return view('my_tickets');
-});
+// Route::get('/my_tickets', function () {
+//     return view('my_tickets');
+// });
 
 Route::get('/contacts', function () {
     return view('contacts');
 });
 
-// Route::get('/authorization', function () {
-//     return view('authorization');
+// Route::get('/exhibitions_curator', function () {
+//     return view('exhibitions_curator');
 // });
 
-Route::get('/exhibitions_curator', function () {
-    return view('exhibitions_curator');
-});
-
-Route::get('/exhibitions_curator_add', function () {
-    return view('exhibitions_curator_add');
-});
+// Route::get('/exhibitions_curator_add', function () {
+//     return view('exhibitions_curator_add');
+// });
 
 // Route::get('/exhibits_curator_add', function () {
 //     return view('exhibits_curator_add');
-// });
+// })->name('exhibits_curator_add.index');
 
-use App\Http\Controllers\ExhibitController;
-
-Route::get('/exhibits_curator_add', function () {
-    return view('exhibits_curator_add');
-})->name('exhibits_curator_add.index');
-
-Route::post('/exhibits_curator_add', [ExhibitController::class, 'store'])->name('exhibits_curator_add.store');
+// Route::post('/exhibits_curator_add', [ExhibitController::class, 'store'])->name('exhibits_curator_add.store');
 
 Route::get('/one_exhibits', function () {
     return view('one_exhibits');
@@ -95,9 +102,6 @@ Route::get('/one_exhibitions', function () {
     return view('one_exhibitions');
 });
 
-Route::get('/bot_settings', function () {
-    return view('bot_settings');
-});
-
-
-// Route::post('/exhibits_curator_add', [ExhibitController::class, 'store'])->name('exhibits_curator_add.store');
+// Route::get('/bot_settings', function () {
+//     return view('bot_settings');
+// });

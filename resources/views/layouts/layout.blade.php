@@ -40,12 +40,21 @@
             <a href="/contacts" class="">
                 contacts
             </a>
-            <a href="/my_tickets" class="">
-                tickets
-            </a>
-            <a href="/bot_settings" class="">
-                bot
-            </a>
+            @if (auth()->user()->hasRole('visitor'))
+                <a href="/tickets" class="">
+                    tickets
+                </a>
+                <a href="/bot_settings" class="">
+                    bot
+                </a>
+            @elseif (auth()->user()->hasRole('curator'))
+                <a href="/exhibitions_curator" class="">
+                    exhibitions studio
+                </a>
+                {{-- <a href="/exhibitions" class="">
+                    exhibits studio
+                </a> --}}
+            @endif
 
         </div>
 
