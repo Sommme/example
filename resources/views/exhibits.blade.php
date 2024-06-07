@@ -5,7 +5,7 @@
 @section('content')
     <div>
         <div>
-            <a href="#" class="btn">Add Exhibit</a>
+            <a href="/exhibits_curator_add" class="btn">Add Exhibit</a>
         </div>
         <div>
             {{-- <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="Photo of the exhibit"> --}}

@@ -75,6 +75,18 @@ Route::get('/exhibitions_curator_add', function () {
     return view('exhibitions_curator_add');
 });
 
+// Route::get('/exhibits_curator_add', function () {
+//     return view('exhibits_curator_add');
+// });
+
+use App\Http\Controllers\ExhibitController;
+
+Route::get('/exhibits_curator_add', function () {
+    return view('exhibits_curator_add');
+})->name('exhibits_curator_add.index');
+
+Route::post('/exhibits_curator_add', [ExhibitController::class, 'store'])->name('exhibits_curator_add.store');
+
 Route::get('/one_exhibits', function () {
     return view('one_exhibits');
 });
@@ -82,3 +94,10 @@ Route::get('/one_exhibits', function () {
 Route::get('/one_exhibitions', function () {
     return view('one_exhibitions');
 });
+
+Route::get('/bot_settings', function () {
+    return view('bot_settings');
+});
+
+
+// Route::post('/exhibits_curator_add', [ExhibitController::class, 'store'])->name('exhibits_curator_add.store');
