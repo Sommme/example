@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Add Exhibit')
+@section('title', 'Add Exhibition')
 <link href="{{ asset('css/custom-btn.css?v=') . time() }}" rel="stylesheet">
 @section('content')
     <h1>Add Exhibition</h1>

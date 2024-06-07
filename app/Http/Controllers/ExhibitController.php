@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Exhibit;
+use Illuminate\Support\Facades\Auth;
 class ExhibitController extends Controller
 {
     /**
@@ -11,7 +12,8 @@ class ExhibitController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Exhibit::orderBy('created_at', 'desc')->paginate(10);
+        return view('exhibits_curator_add', compact('posts'));
     }
 
     /**
@@ -19,7 +21,7 @@ class ExhibitController extends Controller
      */
     public function create()
     {
-        //
+        // return view('exhibits_curator_add.create');
     }
 
     /**
@@ -27,7 +29,24 @@ class ExhibitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'author' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'creation_date' => 'nullable|date',
+            'photo' => 'required|string|max:255',
+        ]);
+
+        $exhibit = new Exhibit;
+        $exhibit->name = $request->name;
+        $exhibit->author = $request->author;
+        $exhibit->description = $request->description;
+        $exhibit->creation_date = $request->creation_date;
+        $exhibit->photo = $request->photo;
+        $exhibit->user_id = Auth::id(); // ID текущего пользователя
+        $exhibit->save();
+
+        return redirect()->route('exhibits_curator_add.index')->with('success', 'Exhibit added successfully');
     }
 
     /**

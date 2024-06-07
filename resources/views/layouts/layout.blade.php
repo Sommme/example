@@ -43,6 +43,10 @@
             <a href="/my_tickets" class="">
                 my tickets
             </a>
+            <a href="/bot_settings" class="">
+                bot
+            </a>
+
         </div>
 
         <div class="account-actions">
