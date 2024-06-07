@@ -1,0 +1,74 @@
+.double-block {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.cover {
+    width: 500px;
+    border-radius: 20px;
+}
+
+.bot-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 500px;
+}
+
+.main-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-family: "Golos Text", serif;
+    font-weight: 500;
+
+    text-decoration: none;
+    color: #181913;
+    padding: 10px 20px;
+    border: 2px solid #181913;
+    border-radius: 10px;
+    width: 100%;
+}
+
+
+.main-link:hover {
+    background-color: #181913;
+    color: #fff;
+}
+
+a {
+    width: fit-content;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #ff5722;
+    color: #181913;
+}
+
+.connected {
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: aqua;
+    color: #181913;
+
+    font-size: 18px;
+    font-family: "Golos Text", serif;
+    font-weight: 500;
+}
