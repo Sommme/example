@@ -26,7 +26,7 @@
 
                 <div class="contact-details">
                     <p>+7 (495) 957-07-00</p>
-                    <p>Thu, Fri, Sat: 10:00 AM — 9:00 PM/p>
+                    <p>Thu, Fri, Sat: 10:00 AM — 9:00 PM</p>
                 </div>
             </div>
 

@@ -101,6 +101,10 @@ Route::get('/one_exhibitions', function () {
     return view('one_exhibitions');
 });
 
+Route::get('/exhibitions_curator', function () {
+    return view('exhibitions_curator');
+});
+
 // Route::get('/bot_settings', function () {
 //     return view('bot_settings');
 // });
