@@ -30,10 +30,10 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login/confirm_login', [AuthController::class, 'login_confirm']);
 
-// Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login/confirm_register', [AuthController::class, 'register_confirm']);
 
-// Группа маршрутов для роли "куратор"
+
+
 Route::group(['middleware' => ['auth', 'role:curator']], function () {
     Route::get('/exhibitions_curator', function () {
         return view('exhibitions_curator');
@@ -43,15 +43,14 @@ Route::group(['middleware' => ['auth', 'role:curator']], function () {
         return view('exhibitions_curator_add');
     });
     
-    Route::get('/exhibits_curator_add', function () {
-        return view('exhibits_curator_add');
-    })->name('exhibits_curator_add.index');
+    Route::get('/new_exhibit', [ExhibitController::class, 'new_exhibit_index'])->name('new_exhibit.index');
     
-    Route::post('/exhibits_curator_add', [ExhibitController::class, 'store'])->name('exhibits_curator_add.store');
+    Route::post('/new_exhibit/create', [ExhibitController::class, 'create'])->name('new_exhibit.create');
     
 });
 
-// Группа маршрутов для роли "посетитель"
+
+
 Route::group(['middleware' => ['auth', 'role:visitor']], function () {
     Route::get('/tickets', function () {
         return view('tickets');

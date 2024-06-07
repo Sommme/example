@@ -10,74 +10,33 @@ class ExhibitController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function new_exhibit_index()
     {
-        $posts = Exhibit::orderBy('created_at', 'desc')->paginate(10);
-        return view('exhibits_curator_add', compact('posts'));
+        return view('new_exhibit');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        // return view('exhibits_curator_add.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'author' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'creation_date' => 'nullable|date',
-            'photo' => 'required|string|max:255',
+            'exhibit_date' => 'nullable|date',
         ]);
 
         $exhibit = new Exhibit;
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('public/assets/exhibits');
+            $exhibit->photo = $path;
+        }
         $exhibit->name = $request->name;
         $exhibit->author = $request->author;
         $exhibit->description = $request->description;
-        $exhibit->creation_date = $request->creation_date;
-        $exhibit->photo = $request->photo;
+        $exhibit->creation_date = $request->exhibit_date;
+        // $exhibit->photo = $request->photo;
         $exhibit->user_id = Auth::id(); // ID текущего пользователя
         $exhibit->save();
 
-        return redirect()->route('exhibits_curator_add.index')->with('success', 'Exhibit added successfully');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('new_exhibit.index')->with('success', 'Exhibit added successfully');
     }
 }

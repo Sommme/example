@@ -4,8 +4,8 @@
 
 @section('content')
 
-    <link href="{{ asset('css/authorization.css?v=') . time() }}" rel="stylesheet">
     <link href="{{ asset('css/form.css?v=') . time() }}" rel="stylesheet">
+    <link href="{{ asset('css/authorization.css?v=') . time() }}" rel="stylesheet">
 
     <script>
         $(document).ready(function() {

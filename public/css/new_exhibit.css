@@ -1,0 +1,10 @@
+.double-input {
+    display: flex;
+    gap: 20px;
+}
+
+.alert {
+    font-size: 14px;
+    font-family: "Golos Text", serif;
+    font-weight: 500;
+}

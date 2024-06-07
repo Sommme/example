@@ -15,6 +15,12 @@ form {
     padding: 20px;
 }
 
+.form-title {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
 form .inputs-block {
     display: flex;
     flex-direction: column;
@@ -40,6 +46,25 @@ form input {
     font-size: 14px;
     font-weight: 500;
     font-family: "Golos Text", serif;
+}
+
+form input[type="file"],
+form input[type="file"]:hover,
+form input[type="file"]:focus {
+    border: none;
+}
+
+form textarea {
+    padding: 10px;
+    border: 1px solid #181913;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "Golos Text", serif;
+
+    height: 96px;
+    resize: none;
 }
 
 form select {

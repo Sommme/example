@@ -52,9 +52,9 @@
                     <a href="/exhibitions_curator" class="">
                         exhibitions studio
                     </a>
-                    {{-- <a href="/exhibitions" class="">
-                    exhibits studio
-                </a> --}}
+                    <a href="/new_exhibit" class="">
+                        add exhibit
+                    </a>
                 @endif
             @endauth
 
