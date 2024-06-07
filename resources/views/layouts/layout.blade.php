@@ -41,13 +41,16 @@
                 contacts
             </a>
             <a href="/my_tickets" class="">
-                my tickets
+                tickets
             </a>
         </div>
 
         <div class="account-actions">
             @auth
-                <p>{{ Auth::user()->name }}</p>
+                <div class="user-profile">
+                    <p class="pill">ID {{ Auth::user()->id }}</p>
+                    <p>{{ Auth::user()->name }}</p>
+                </div>
                 <a href="/logout" class="o-btn">Sign Out</a>
             @endauth
 

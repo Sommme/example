@@ -16,6 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        DB::table('directions')->insert([
+            ['name' => 'Painting'],
+            ['name' => 'Sculpture'],
+            ['name' => 'Photography'],
+            ['name' => 'Graphics'],
+            ['name' => 'Arts'],
+        ]);
     }
 
     /**

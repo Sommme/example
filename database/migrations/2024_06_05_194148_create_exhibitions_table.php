@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('address');
             $table->integer('ticket_price');
             $table->integer('max_tickets');
+            $table->integer('remaining_tickets');
             $table->string('photo');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->cascadeOnUpdate();
             $table->foreignId('direction_id')->constrained('directions')->onDelete('cascade')->cascadeOnUpdate();

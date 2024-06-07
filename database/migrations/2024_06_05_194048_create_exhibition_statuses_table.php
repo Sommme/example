@@ -16,6 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        DB::table('exhibition_statuses')->insert([
+            ['name' => 'Planned'],
+            ['name' => 'Ongoing'],
+            ['name' => 'Completed'],
+        ]);
     }
 
     /**

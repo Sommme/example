@@ -63,9 +63,9 @@ Route::get('/contacts', function () {
     return view('contacts');
 });
 
-Route::get('/authorization', function () {
-    return view('authorization');
-});
+// Route::get('/authorization', function () {
+//     return view('authorization');
+// });
 
 Route::get('/exhibitions_curator', function () {
     return view('exhibitions_curator');
