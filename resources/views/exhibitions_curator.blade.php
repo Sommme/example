@@ -4,9 +4,9 @@
 <link href="{{ asset('css/custom-btn.css?v=') . time() }}" rel="stylesheet">
 @section('content')
 <div>
-    {{-- <div>
+    <div>
     <a href="/exhibitions_curator_add" class="btn">Add Exhibition</a>
-    </div> --}}
+    </div>
     <div>
         {{-- <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="Exhibition photo"> --}}
         <h2>Exhibition Name 2</h2>
@@ -19,10 +19,10 @@
         <p>Last update: 06.01.2024</p>
     </div>
 
-    {{-- <div>
+    <div>
         <a href="#" class="btn">Edit</a>
         <a href="#" class="btn">Delete</a>
-    </div> --}}
+    </div>
 
     <div>
         {{-- <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="Exhibition photo"> --}}
@@ -36,10 +36,10 @@
         <p>Last update: 07.01.2024</p>
     </div>
 
-    {{-- <div>
+    <div>
         <a href="#" class="btn">Edit</a>
         <a href="#" class="btn">Delete</a>
-    </div> --}}
+    </div>
 
     {{-- <div>
         <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="Exhibition photo">
