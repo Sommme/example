@@ -17,4 +17,12 @@ class Direction extends Model
     {
         return $this->hasMany(Exhibition::class);
     }
+
+    public static function getIdByName(string $name): ?int
+    {
+        $direction = self::where('name', $name)->first();
+        return $direction ? $direction->id : null;
+    }
+
+
 }
