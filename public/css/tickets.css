@@ -1,0 +1,16 @@
+.tickets {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 100%;
+}
+
+.ticket {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 10px;
+    /* Отступ после линии */
+    border-bottom: 1px solid #181913;
+    /* Цвет линии */
+}

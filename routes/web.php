@@ -56,17 +56,13 @@ Route::group(['middleware' => ['auth', 'role:curator']], function () {
 
 
 Route::group(['middleware' => ['auth', 'role:visitor']], function () {
-    Route::get('/tickets', function () {
-        return view('tickets');
-    });
+    Route::get('/tickets', [TicketController::class, 'get_user_tickets'])->name('get_user_tickets.index');
 
     Route::post('/buy_ticket', [TicketController::class, 'buy_ticket'])->name('buy_ticket');
 
     Route::get('/bot_settings', function () {
         return view('bot_settings');
     });
-
-
 });
 
 Route::get('/exhibitions', function () {

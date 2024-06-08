@@ -28,4 +28,17 @@ class TicketController extends Controller
         return redirect()->back()->with('success', 'Билеты успешно куплены!');
     }
 
+    public function get_user_tickets()
+    {
+        $user = Auth::user(); // Получаем текущего пользователя
+
+        // Получаем все билеты, купленные этим пользователем
+        $tickets = Ticket::with('exhibition')
+            ->where('user_id', $user->id)
+            ->get();
+
+        // Возвращаем представление с билетами
+        return view('tickets', ['tickets' => $tickets]);
+    }
+
 }
