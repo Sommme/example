@@ -25,4 +25,13 @@ class Ticket extends Model
     {
         return $this->belongsTo(Exhibition::class);
     }
+
+    public static function saveData($data)
+    {
+        return self::create([
+                'user_id' => $data['user_id'], 'exhibition_id' => $data['exhibition_id'],
+                    'quantity' => $data['quantity'], 'exhibition_datetime' => $data['exhibition_datetime']
+            ]
+        );
+    }
 }

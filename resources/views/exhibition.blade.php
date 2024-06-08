@@ -39,9 +39,8 @@
 
         @auth
             <div class="actions">
-                <a href="#" class="btn  buy">Buy Ticket {{ $schedule->exhibition->ticket_price }}₽</a>
                 @if (auth()->user()->hasRole('visitor'))
-                    a href="#" class="btn  buy">Buy Ticket {{ $schedule->exhibition->ticket_price }}₽</a>
+                    <a href="#" class="btn  buy">Buy Ticket {{ $schedule->exhibition->ticket_price }}₽</a>
                 @elseif (auth()->user()->hasRole('curator'))
                     <a href="#" class="btn">Delete</a>
                 @endif
@@ -52,20 +51,14 @@
         <div id="ticketForm" style="display: none;">
             <form action="{{ route('buy_ticket') }}" method="POST">
                 @csrf
-                <div class="main">
-                    <h3>{{ $schedule->exhibition->name }}</h3>
-                    <input type="hidden" name="exhibition_id" value="{{ $schedule->exhibition->id }}">
-                    <label for="quantity">Count tickets</label>
-                    <input type="number" id="quantity" name="quantity" min="1"
-                        max="{{ $schedule->exhibition->remaining_tickets }}">
-                </div>
-
-                <p class="price">{{ $schedule->exhibition->ticket_price }}₽</p>
-
-                <div class="form-actions">
-                    <button type="submit">Buy</button>
-                    <button type="button" id="closeForm">Close</button>
-                </div>
+                <h2>{{ $schedule->exhibition->name }}</h2>
+                <input type="hidden" name="exhibition_id" value="{{ $schedule->exhibition->id }}">
+                <input type="hidden" name="exhibition_datetime" value="{{ $schedule->start_datetime }}">
+                <label for="quantity">Quantity of tickets</label>
+                <input type="number" id="quantity" name="quantity" min="1"
+                    max="{{ $schedule->exhibition->remaining_tickets }}">
+                <button type="submit">Buy</button>
+                <button type="button" id="closeForm">Close</button>
             </form>
         </div>
 
