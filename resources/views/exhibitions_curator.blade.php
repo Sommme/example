@@ -2,78 +2,42 @@
 
 @section('title', 'exhibitions')
 <link href="{{ asset('css/custom-btn.css?v=') . time() }}" rel="stylesheet">
+<link href="{{ asset('css/exhibitions_curator.css?v=') . time() }}" rel="stylesheet">
 @section('content')
-<div>
-    <div>
-    <a href="/exhibitions_curator_add" class="btn">Add Exhibition</a>
-    </div>
-    <div>
-        {{-- <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="Exhibition photo"> --}}
-        <h2>Exhibition Name 2</h2>
-        <p>Address: Example Street, 124</p>
-        <p>Ticket price: 500 rub.</p>
-        <p>Maximum number of tickets: 100</p>
-        <p>Organizer: Ivan Ivanov</p>
-        <p>Direction: Contemporary Art</p>
-        <p>Date added: 02.01.2024</p>
-        <p>Last update: 06.01.2024</p>
-    </div>
+    <div class="content">
+        <div class="title-block">
+            <h1>Exhibitions</h1>
+            <a href="/exhibitions_curator_add" class="btn">Add Exhibition</a>
+        </div>
 
-    <div>
-        <a href="#" class="btn">Edit</a>
-        <a href="#" class="btn">Delete</a>
-    </div>
+        @isset($exhibitions)
+            <div class="exhibitions">
+                @foreach ($exhibitions as $exhibition)
+                    <div class="exhibition">
+                        <div class="cover">
+                            <img src="{{ Storage::url($exhibition->photo) }}" alt="Exhibition photo">
+                        </div>
+                        <h3>{{ $exhibition->name }}</h3>
+                        <p>Address: {{ $exhibition->address }}</p>
+                        <p>Ticket price: {{ $exhibition->ticket_price }} rub.</p>
+                        <p>Maximum number of tickets: {{ $exhibition->max_tickets }}</p>
+                        <p>Remaining tickets: {{ $exhibition->remaining_tickets }}</p>
+                        <p>Organizer: {{ $exhibition->user->name }}</p>
+                        <p>Direction: {{ $exhibition->direction->name }}</p>
 
-    <div>
-        {{-- <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="Exhibition photo"> --}}
-        <h2>Exhibition Name 3</h2>
-        <p>Address: Example Street, 125</p>
-        <p>Ticket price: 500 rub.</p>
-        <p>Maximum number of tickets: 100</p>
-        <p>Organizer: Ivan Ivanov</p>
-        <p>Direction: Contemporary Art</p>
-        <p>Date added: 03.01.2024</p>
-        <p>Last update: 07.01.2024</p>
+                        <div>
+                            <a href="#" class="btn btn-primary">Edit</a>
+                            <form action="{{ route('exhibition.delete', $exhibition->id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+                {{ $exhibitions->links() }}
+            </div>
+        @endisset
     </div>
-
-    <div>
-        <a href="#" class="btn">Edit</a>
-        <a href="#" class="btn">Delete</a>
-    </div>
-
-    {{-- <div>
-        <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="Exhibition photo">
-        <h2>Exhibition Name 4</h2>
-        <p>Address: Example Street, 126</p>
-        <p>Ticket price: 500 rub.</p>
-        <p>Maximum number of tickets: 100</p>
-        <p>Organizer: Ivan Ivanov</p>
-        <p>Direction: Contemporary Art</p>
-        <p>Date added: 04.01.2024</p>
-        <p>Last update: 08.01.2024</p>
-    </div> --}}
-    
-    {{-- <div>
-        <a href="#" class="btn">Edit</a>
-        <a href="#" class="btn">Delete</a>
-    </div> --}}
-
-    {{-- <div>
-        <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="Exhibition photo">
-        <h2>Exhibition Name 5</h2>
-        <p>Address: Example Street, 127</p>
-        <p>Ticket price: 500 rub.</p>
-        <p>Maximum number of tickets: 100</p>
-        <p>Organizer: Ivan Ivanov</p>
-        <p>Direction: Contemporary Art</p>
-        <p>Date added: 05.01.2024</p>
-        <p>Last update: 09.01.2024</p>
-    </div>
-    
-    <div>
-        <a href="#" class="btn">Edit</a>
-        <a href="#" class="btn">Delete</a>
-    </div> --}}
-    
-</div>
 @endsection

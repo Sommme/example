@@ -3,62 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Exhibition;
+use Illuminate\Support\Facades\Auth;
 
 class ExhibitionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function exhibitions_curator_index()
     {
-        //
+        $user = Auth::user();
+        $exhibitions = Exhibition::where('user_id', $user->id)->paginate(5);;
+
+        return view('exhibitions_curator', compact('exhibitions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function create(Request $request) {
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function delete_exhibition($id)
     {
-        //
-    }
+        $exhibition = Exhibition::findOrFail($id);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if ($exhibition->user_id == Auth::id()) {
+            $exhibition->delete();
+            return redirect()->back()->with('success', 'Exhibition deleted successfully.');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->back()->with('error', 'You are not authorized to delete this exhibition.');
     }
 }

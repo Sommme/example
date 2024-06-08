@@ -28,8 +28,8 @@ header .logo img {
 
 .menu {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 25%;
+    right: 25%;
 
     display: flex;
     justify-content: center;

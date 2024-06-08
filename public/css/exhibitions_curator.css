@@ -1,0 +1,37 @@
+.content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.title-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.title-block a {
+    text-align: center;
+    width: fit-content;
+}
+
+.exhibitions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+.exhibition {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cover {
+    width: 400px;
+    height: 240px;
+}

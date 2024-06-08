@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExhibitController;
+use App\Http\Controllers\ExhibitionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,16 +36,17 @@ Route::post('/login/confirm_register', [AuthController::class, 'register_confirm
 
 
 Route::group(['middleware' => ['auth', 'role:curator']], function () {
-    Route::get('/exhibitions_curator', function () {
-        return view('exhibitions_curator');
-    });
+    // Route::get('/exhibitions_curator', function () {
+    //     return view('exhibitions_curator');
+    // });
+    Route::get('/exhibitions_curator', [ExhibitionController::class, 'exhibitions_curator_index']);
     
     Route::get('/exhibitions_curator_add', function () {
         return view('exhibitions_curator_add');
     });
+    Route::delete('/exhibition/delete/{id}', [ExhibitionController::class, 'delete_exhibition'])->name('exhibition.delete');
     
     Route::get('/new_exhibit', [ExhibitController::class, 'new_exhibit_index'])->name('new_exhibit.index');
-    
     Route::post('/new_exhibit/create', [ExhibitController::class, 'create'])->name('new_exhibit.create');
     
 });
@@ -59,8 +61,6 @@ Route::group(['middleware' => ['auth', 'role:visitor']], function () {
     Route::get('/bot_settings', function () {
         return view('bot_settings');
     });
-    
-
 });
 
 Route::get('/exhibitions', function () {
@@ -71,40 +71,14 @@ Route::get('/exhibits', function () {
     return view('exhibits');
 });
 
-// Route::get('/my_tickets', function () {
-//     return view('my_tickets');
-// });
-
 Route::get('/contacts', function () {
     return view('contacts');
 });
 
-// Route::get('/exhibitions_curator', function () {
-//     return view('exhibitions_curator');
-// });
-
-// Route::get('/exhibitions_curator_add', function () {
-//     return view('exhibitions_curator_add');
-// });
-
-// Route::get('/exhibits_curator_add', function () {
-//     return view('exhibits_curator_add');
-// })->name('exhibits_curator_add.index');
-
-// Route::post('/exhibits_curator_add', [ExhibitController::class, 'store'])->name('exhibits_curator_add.store');
-
-Route::get('/one_exhibits', function () {
-    return view('one_exhibits');
+Route::get('/exhibit/{id}', function () {
+    return view('exhibit');
 });
 
-Route::get('/one_exhibitions', function () {
-    return view('one_exhibitions');
+Route::get('/exhibition/{id}', function () {
+    return view('exhibition');
 });
-
-Route::get('/exhibitions_curator', function () {
-    return view('exhibitions_curator');
-});
-
-// Route::get('/bot_settings', function () {
-//     return view('bot_settings');
-// });
