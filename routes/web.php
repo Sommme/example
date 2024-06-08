@@ -74,10 +74,6 @@ Route::get('/exhibits', function () {
     return view('exhibits');
 });
 
-// Route::get('/my_tickets', function () {
-//     return view('my_tickets');
-// });
-
 Route::get('/contacts', function () {
     return view('contacts');
 });
@@ -86,14 +82,8 @@ Route::get('/exhibit/{id}', function () {
     return view('exhibit');
 });
 
-Route::get('/exhibition/{id}', function () {
-    return view('exhibition');
-});
+Route::get('/exhibition/{id}', [ExhibitionController::class, 'get_exhibition_index']);
 
 Route::get('/exhibitions_curator', function () {
     return view('exhibitions_curator');
 });
-
-// Route::get('/bot_settings', function () {
-//     return view('bot_settings');
-// });

@@ -10,27 +10,31 @@
 @section('content')
 
     <div class="content">
-        @isset($exhibitions && $exhibitions->count() > 0)
+        @isset($schedules)
             @php
-                $mainExhibition = $exhibitions->shift();
+                $mainSchedule = $schedules->shift();
             @endphp
 
-            <div class="main-exhibition">
-                <div class="cover">
-                    <img src="{{ Storage::url($mainExhibition->photo) }}" alt="Exhibition photo">
-                    <div class="overlay"></div>
-                    <div class="main-exhibition-text">
-                        <h2>{{ $mainExhibition->name }}</h2>
-                        <div class="details">
-                            <p>{{ $mainExhibition->schedules->first()->status->name }}</p>
-                            <p>{{ $mainExhibition->schedules->first()->start_datetime }} ·
-                                {{ $mainExhibition->schedules->first()->end_datetime }}</p>
-                            <p>{{ $mainExhibition->address }}</p>
+            @if ($mainSchedule)
+                <div class="main-exhibition">
+                    <div class="cover">
+                        <img src="{{ Storage::url($mainSchedule->exhibition->photo) }}" alt="Exhibition photo">
+                        <div class="overlay"></div>
+                        <div class="main-exhibition-text">
+                            <h2>{{ $mainSchedule->exhibition->name }}</h2>
+                            <div class="details">
+                                <p>{{ $mainSchedule->status->name }}</p>
+                                <p>{{ $mainSchedule->start_datetime }} ·
+                                    {{ $mainSchedule->end_datetime }}</p>
+                                <p>{{ $mainSchedule->exhibition->address }}</p>
+                            </div>
+                            <a href="/exhibition/{{ $mainSchedule->exhibition->id }}" class="btn">Buy a Ticket</a>
                         </div>
-                        <a href="/exhibition/{{ $mainExhibition->id }}" class="btn">Buy a Ticket</a>
+
                     </div>
                 </div>
-            </div>
+            @endif
+
         @endisset
         {{-- <div class="main-exhibition">
             <div class="cover">
@@ -55,29 +59,41 @@
         <div class="exhibitions">
             <h3>future exhibitions</h3>
 
-            <div class="controlls">
-                <div class="filters">
-                    <div class="filter">
-                        Art
-                    </div>
-                    <div class="filter">
-                        Photography
-                    </div>
-                    <div class="filter">
-                        Science
-                    </div>
-                    <div class="filter">
-                        Technology
-                    </div>
-                    <div class="filter">
-                        Historical
-                    </div>
+            @if ($schedules && $schedules->count() > 0)
+
+                <div class="controlls">
+                    @foreach ($directions as $direction)
+                        <div class="filter">
+                            {{ $direction->name }}
+                        </div>
+                    @endforeach
+
+                    <a href="/exhibitions" class="btn">see all</a>
                 </div>
 
-                <a href="/exhibitions" class="btn">see all</a>
-            </div>
+                <div class="grid">
+                    @foreach ($schedules as $schedule)
+                        <a href="/exhibition/{{ $schedule->exhibition->id }}" class="exhibition-card">
+                            <div class="cover">
+                                <img src="{{ Storage::url($schedule->exhibition->photo) }}" alt="Exhibition photo">
+                                <div class="overlay">
+                                    <div class="tags">{{ $schedule->status->name }}</div>
+                                    <h3>{{ $schedule->exhibition->name }}</h3>
+                                    <div class="details">
+                                        <p>{{ $schedule->start_datetime }} · {{ $schedule->end_datetime }}</p>
+                                        <p>{{ $schedule->exhibition->address }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            @else
+                <p>Not founded</p>
 
-            <div class="grid">
+            @endif
+
+            {{-- <div class="grid">
                 <a href="#" class="exhibition-card">
                     <div class="cover">
                         <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="">
@@ -120,7 +136,8 @@
                     </div>
                 </a>
 
-            </div>
+            </div> --}}
+
         </div>
     </div>
 

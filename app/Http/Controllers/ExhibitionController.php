@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Exhibition;
 use App\Models\ExhibitionExhibit;
 use App\Models\Schedule;
+use App\Models\Direction;
 use Illuminate\Http\Request;
 
 class ExhibitionController extends Controller
@@ -14,25 +15,56 @@ class ExhibitionController extends Controller
      * Display a listing of the resource.
      */
 
-     public function get_welcome_index(){
-        $exhibitions = Exhibition::with(['schedules' => function ($query) {
-            $query->orderBy('start_datetime', 'asc');
-        }])->get();
-    
-        // Обновляем статус каждого расписания
-        foreach ($exhibitions as $exhibition) {
-            foreach ($exhibition->schedules as $schedule) {
-                $schedule->updateStatus();
-            }
+     public function get_exhibition_index($id){
+        $schedule = Schedule::with(['exhibition', 'status'])
+        ->where('id', $id)
+        ->first();
+
+        if (!$schedule) {
+            // Если расписания с таким ID не существует, вы можете перенаправить пользователя обратно
+            // или показать страницу с ошибкой. Здесь мы просто возвращаем null.
+            return null;
         }
 
-        return view('welcome', compact('exhibitions'));
+        // Обновляем статус расписания
+        $schedule->updateStatus();
+
+        return view('exhibition_details', ['schedule' => $schedule]);
+     }
+
+     public function get_welcome_index(){
+        $schedules = Schedule::with(['exhibition', 'status'])
+        ->orderBy('start_datetime', 'asc')
+        ->take(4)
+        ->get();
+
+        // Обновляем статус каждого расписания
+        foreach ($schedules as $schedule) {
+            $schedule->updateStatus();
+        }
+
+        // Получаем ID выставок
+        $exhibitionIds = $schedules->pluck('exhibition_id');
+
+        // Получаем уникальные направления для этих выставок
+        $directions = Direction::whereHas('exhibitions', function ($query) use ($exhibitionIds) {
+            $query->whereIn('id', $exhibitionIds);
+        })->distinct()->get('name');
+
+        return view('welcome', compact('schedules', 'directions'));
      }
 
     public function exhibitions_curator_index()
     {
         $user = Auth::user();
-        $exhibitions = Exhibition::where('user_id', $user->id)->paginate(5);
+        $schedules = Schedule::with(['exhibition', 'status'])
+            ->whereHas('exhibition', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->orderBy('start_datetime', 'desc')
+            ->paginate(5);
+
+        return view('exhibitions_curator', compact('schedules'));
     }
     /**
      * Show the form for creating a new resource.
@@ -42,16 +74,16 @@ class ExhibitionController extends Controller
     }
     public function create(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'ticket_price' => 'required|numeric|min:0',
-            'max_tickets' => 'required|integer|min:1',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'direction' => 'required|integer',
-            'start_date' => 'required|date|after:now',
-            'end_date' => 'required|date|after:start_date',
-        ]);
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'address' => 'required|string|max:255',
+        //     'ticket_price' => 'required|numeric|min:0',
+        //     'max_tickets' => 'required|integer|min:1',
+        //     'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        //     'direction' => 'required|integer',
+        //     'start_date' => 'required|date|after:now',
+        //     'end_date' => 'required|date|after:start_date',
+        // ]);
 
         $exhibition = new Exhibition;
         if ($request->hasFile('photo')) {
