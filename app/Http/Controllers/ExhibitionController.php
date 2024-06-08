@@ -17,19 +17,15 @@ class ExhibitionController extends Controller
 
      public function get_exhibition_index($id){
         $schedule = Schedule::with(['exhibition', 'status'])
-        ->where('id', $id)
-        ->first();
+        ->where('exhibition_id', $id)
+        ->first();;
 
         if (!$schedule) {
-            // Если расписания с таким ID не существует, вы можете перенаправить пользователя обратно
-            // или показать страницу с ошибкой. Здесь мы просто возвращаем null.
             return null;
         }
 
-        // Обновляем статус расписания
         $schedule->updateStatus();
-
-        return view('exhibition_details', ['schedule' => $schedule]);
+        return view('exhibition', ['schedule' => $schedule]);
      }
 
      public function get_welcome_index(){
@@ -54,24 +50,26 @@ class ExhibitionController extends Controller
         return view('welcome', compact('schedules', 'directions'));
      }
 
-    public function exhibitions_curator_index()
-    {
-        $user = Auth::user();
-        $schedules = Schedule::with(['exhibition', 'status'])
-            ->whereHas('exhibition', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
-            })
-            ->orderBy('start_datetime', 'desc')
-            ->paginate(5);
+     public function get_exhibitions_curator_index()
+     {
+         $user = Auth::user();
+         $schedules = Schedule::with('status')
+             ->whereHas('exhibition', function ($query) use ($user) {
+                 $query->where('user_id', $user->id);
+             })
+             ->orderBy('start_datetime', 'desc')
+             ->paginate(5);
+     
+         // Загрузка связанных данных
+         $schedules->load('exhibition');
+     
+         return view('exhibitions_curator', compact('schedules'));
+     }
 
-        return view('exhibitions_curator', compact('schedules'));
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
     public function exhibitions_add_index(){
         return view('exhibitions_curator_add');
     }
+    
     public function create(Request $request)
     {
         // $request->validate([

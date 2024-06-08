@@ -10,8 +10,6 @@
                 {{ session('success') }}
             </div>
         @endif
-
-    <h1>Add Exhibition</h1>
     <form action="{{url('/new_exhibition/create')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
@@ -19,11 +17,9 @@
             <h3>New Exhibition</h3>
         </div>
 
-
-        <br>
          <div class = "input-block">
             <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name"><br>
+            <input type="text" id="name" name="name">
             @error('name')
                 <p class="error-text">{{ $message }}</p>
             @enderror
@@ -31,24 +27,24 @@
 
 
         <div class="input-block">
-            <label for="address">Address:</label><br>
-            <input type="text" id="address" name="address"><br>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address">
             @error('address')
                 <p class="error-text">{{ $message }}</p>
             @enderror
         </div>
 
         <div class="input-block">
-            <label for="ticket_price">Ticket Price:</label><br>
-            <input type="number" id="ticket_price" name="ticket_price"><br>
+            <label for="ticket_price">Ticket Price:</label>
+            <input type="number" id="ticket_price" name="ticket_price">
             @error('ticket_price')
                 <p class="error-text">{{ $message }}</p>
             @enderror
         </div>
 
         <div class="input-block">
-            <label for="max_tickets">Max Tickets:</label><br>
-            <input type="number" id="max_tickets" name="max_tickets"><br>
+            <label for="max_tickets">Max Tickets:</label>
+            <input type="number" id="max_tickets" name="max_tickets">
             @error('max_tickets')
                 <p class="error-text">{{ $message }}</p>
             @enderror
@@ -62,12 +58,12 @@
             @enderror
         </div>
 
-        <label for="direction">Direction</label><br>
+        <label for="direction">Direction</label>
         <select name="direction" id="direction">
             @foreach ($directions as $direction)
                 <option value="{{$direction['id']}}">{{$direction['name']}}</option>
             @endforeach
-        </select><br><br>
+        </select>
 
 
         <div class="input-block">
@@ -76,7 +72,7 @@
             @foreach ($exhibits as $exhbit)
                 <option value="{{$exhbit['id']}}">{{$exhbit['name']}}</option>
             @endforeach
-        </select><br><br>
+        </select>
 
         </div>
 

@@ -40,6 +40,5 @@
                 {{ $schedules->links() }}
             </div>
         @endisset
-
     </div>
 @endsection

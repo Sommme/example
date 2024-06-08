@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExhibitController;
 use App\Http\Controllers\ExhibitionController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,7 @@ Route::group(['middleware' => ['auth', 'role:curator']], function () {
     // Route::get('/exhibitions_curator', function () {
     //     return view('exhibitions_curator');
     // });
-    Route::get('/exhibitions_curator', [ExhibitionController::class, 'exhibitions_curator_index']);
+    Route::get('/exhibitions_curator', [ExhibitionController::class, 'get_exhibitions_curator_index']);
 
     Route::get('/exhibitions_curator_add', [ExhibitionController::class, 'exhibitions_add_index'])->name('exhibition_add.index');
     Route::delete('/exhibition/delete/{id}', [ExhibitionController::class, 'delete_exhibition'])->name('exhibition.delete');
@@ -58,6 +59,8 @@ Route::group(['middleware' => ['auth', 'role:visitor']], function () {
     Route::get('/tickets', function () {
         return view('tickets');
     });
+
+    Route::post('/buy_ticket', [TicketController::class, 'buy_ticket'])->name('buy_ticket');
 
     Route::get('/bot_settings', function () {
         return view('bot_settings');
@@ -78,12 +81,12 @@ Route::get('/contacts', function () {
     return view('contacts');
 });
 
-Route::get('/exhibit/{id}', function () {
-    return view('exhibit');
-});
+// Route::get('/exhibit/{id}', function () {
+//     return view('exhibit');
+// });
 
 Route::get('/exhibition/{id}', [ExhibitionController::class, 'get_exhibition_index']);
 
-Route::get('/exhibitions_curator', function () {
-    return view('exhibitions_curator');
-});
+// Route::get('/exhibitions_curator', function () {
+//     return view('exhibitions_curator');
+// });

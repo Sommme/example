@@ -1,64 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
+use Spatie\Permission\Models\Role;
+use App\Models\User;
+use App\Models\Ticket;
+use Illuminate\Http\Request;
 
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function buy_ticket(Request $request)
     {
-        //
+        $user = Auth::user();
+        $exhibition_id = $request->input('exhibition_id');
+        $quantity = $request->input('quantity');
+
+        $ticket = Ticket::firstOrCreate(
+            ['user_id' => $user->id, 'exhibition_id' => $exhibition_id],
+            ['quantity' => 0]
+        );
+
+        $ticket->quantity += $quantity;
+        $ticket->save();
+
+        return redirect()->back()->with('success', 'Билеты успешно куплены!');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
