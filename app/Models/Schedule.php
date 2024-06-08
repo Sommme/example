@@ -40,4 +40,14 @@ class Schedule extends Model
 
         $this->save();
     }
+
+    public static function saveData($data)
+    {
+        return self::create([
+            'start_datetime' => $data['start_datetime'][0],
+            'end_datetime' => $data['end_datetime'][0],
+            'exhibition_id' => $data['exhibition_id'],
+            'status_id' => 1
+        ]);
+    }
 }

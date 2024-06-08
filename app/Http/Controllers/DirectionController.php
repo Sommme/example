@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Direction;
 use Illuminate\Http\Request;
 
 class DirectionController extends Controller
@@ -11,7 +12,8 @@ class DirectionController extends Controller
      */
     public function index()
     {
-        //
+        $directions = Direction::all();
+        return view('exhibitions_curator_add', compact('directions'));
     }
 
     /**

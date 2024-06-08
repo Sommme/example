@@ -7,6 +7,12 @@ use App\Models\Exhibit;
 use Illuminate\Support\Facades\Auth;
 class ExhibitController extends Controller
 {
+
+    public function index()
+    {
+        $exhibits = Exhibit::all();
+        return view('exhibitions_curator_add', compact('exhibits'));
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,9 +32,19 @@ class ExhibitController extends Controller
 
         $exhibit = new Exhibit;
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('public/assets/exhibits');
+            // Получение загруженного файла
+            $file = $request->file('photo');
+
+            // Генерация уникального имени файла
+            $filename = time() . '_' . $file->getClientOriginalName();
+
+            // Сохранение изображения в папку public/storage/images
+            $path = $file->storeAs('images/exhibitions', $filename, 'public');
+
+            // Сохранение пути к изображению в базе данных
             $exhibit->photo = $path;
         }
+
         $exhibit->name = $request->name;
         $exhibit->author = $request->author;
         $exhibit->description = $request->description;

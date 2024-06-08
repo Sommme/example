@@ -40,15 +40,17 @@ Route::group(['middleware' => ['auth', 'role:curator']], function () {
     //     return view('exhibitions_curator');
     // });
     Route::get('/exhibitions_curator', [ExhibitionController::class, 'exhibitions_curator_index']);
-    
+
     Route::get('/exhibitions_curator_add', function () {
         return view('exhibitions_curator_add');
     });
     Route::delete('/exhibition/delete/{id}', [ExhibitionController::class, 'delete_exhibition'])->name('exhibition.delete');
-    
+
     Route::get('/new_exhibit', [ExhibitController::class, 'new_exhibit_index'])->name('new_exhibit.index');
+
     Route::post('/new_exhibit/create', [ExhibitController::class, 'create'])->name('new_exhibit.create');
-    
+
+    Route::post('/new_exhibition/create', [ExhibitionController::class, 'create'])->name('new_exhibition.create');
 });
 
 
@@ -61,6 +63,8 @@ Route::group(['middleware' => ['auth', 'role:visitor']], function () {
     Route::get('/bot_settings', function () {
         return view('bot_settings');
     });
+
+
 });
 
 Route::get('/exhibitions', function () {
@@ -70,6 +74,10 @@ Route::get('/exhibitions', function () {
 Route::get('/exhibits', function () {
     return view('exhibits');
 });
+
+// Route::get('/my_tickets', function () {
+//     return view('my_tickets');
+// });
 
 Route::get('/contacts', function () {
     return view('contacts');
@@ -82,3 +90,11 @@ Route::get('/exhibit/{id}', function () {
 Route::get('/exhibition/{id}', function () {
     return view('exhibition');
 });
+
+Route::get('/exhibitions_curator', function () {
+    return view('exhibitions_curator');
+});
+
+// Route::get('/bot_settings', function () {
+//     return view('bot_settings');
+// });

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Exhibition;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Exhibition;
+use App\Models\ExhibitionExhibit;
+use App\Models\Schedule;
+use Illuminate\Http\Request;
 
 class ExhibitionController extends Controller
 {
@@ -14,13 +16,68 @@ class ExhibitionController extends Controller
     public function exhibitions_curator_index()
     {
         $user = Auth::user();
-        $exhibitions = Exhibition::where('user_id', $user->id)->paginate(5);;
+        $exhibitions = Exhibition::where('user_id', $user->id)->paginate(5);
+    }
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(Request $request)
+    {
+        /*$request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'ticket_price' => 'required|numeric|min:0',
+            'max_tickets' => 'required|integer|min:1',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'direction' => 'required|integer',
+            'start_date' => 'required|date|after:now',
+            'end_date' => 'required|date|after:start_date',
+        ]);*/
 
-        return view('exhibitions_curator', compact('exhibitions'));
+        $exhibition = new Exhibition;
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('public/assets/exhibitions');
+            $exhibition->photo = $path;
+        }
+        $exhibition->name = $request->name;
+        $exhibition->address = $request->address;
+        $exhibition->ticket_price = $request->ticket_price;
+        $exhibition->max_tickets = $request->max_tickets;
+        $exhibition->remaining_tickets = $request->max_tickets;
+        $exhibition->direction_id = $request->direction;
+        $exhibition->user_id = Auth::id();
+        $exhibition->save();
+
+        foreach ($request->exhibits as $exhibit) {
+            $data['exhibition_id'] = $exhibition->id;
+            $data['exhibit_id'] = $exhibit;
+
+            ExhibitionExhibit::saveData($data);
+        }
+
+        $data['start_datetime'] = $request->start_date;
+        $data['end_datetime'] = $request->end_date;
+        $data['status_id'] = 1;
+
+        Schedule::saveData($data);
+
+        return redirect()->route('new_exhibition.index')->with('success', 'Exhibition added successfully');
     }
 
-    public function create(Request $request) {
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
     }
 
     public function delete_exhibition($id)

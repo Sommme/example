@@ -23,4 +23,12 @@ class ExhibitionExhibit extends Model
     {
         return $this->belongsTo(Exhibit::class);
     }
+
+    public static function saveData($data)
+    {
+        return self::create([
+            'exhibition_id' => $data['exhibition_id'],
+            'exhibit_id' => $data['exhibit_id'],
+        ]);
+    }
 }
