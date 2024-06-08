@@ -19,19 +19,28 @@
 .exhibitions {
     display: flex;
     flex-direction: column;
-    gap: 10px;
     justify-content: center;
+    gap: 10px;
     width: 100%;
 }
 
 .exhibition {
     width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    gap: 20px;
+    align-items: start;
+    border-bottom: 1px solid #181913;
+    /* Цвет линии */
 }
 
 .cover {
-    width: 400px;
-    height: 240px;
+    width: 240px;
+    height: 180px;
+    border-radius: 10px;
+}
+
+.exhibitions p,
+h3 {
+    color: #181913;
 }

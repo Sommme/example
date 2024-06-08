@@ -18,16 +18,18 @@
                             <img src="{{ Storage::url($schedule->exhibition->photo) }}" alt="Exhibition photo">
                         </div>
 
-                        <h3>{{ $schedule->exhibition->name }}</h3>
-                        <p>Address: {{ $schedule->exhibition->address }}</p>
-                        <p>Ticket price: {{ $schedule->exhibition->ticket_price }} rub.</p>
-                        <p>Maximum number of tickets: {{ $schedule->exhibition->max_tickets }}</p>
-                        <p>Remaining tickets: {{ $schedule->exhibition->remaining_tickets }}</p>
-                        <p>Organizer: {{ $schedule->exhibition->user->name }}</p>
-                        <p>Direction: {{ $schedule->exhibition->direction->name }}</p>
+                        <div class="text">
+                            <h3>{{ $schedule->exhibition->name }}</h3>
+                            <p>Address: {{ $schedule->exhibition->address }}</p>
+                            <p>Ticket price: {{ $schedule->exhibition->ticket_price }} rub.</p>
+                            <p>Maximum number of tickets: {{ $schedule->exhibition->max_tickets }}</p>
+                            <p>Remaining tickets: {{ $schedule->exhibition->remaining_tickets }}</p>
+                            <p>Organizer: {{ $schedule->exhibition->user->name }}</p>
+                            <p>Direction: {{ $schedule->exhibition->direction->name }}</p>
+                        </div>
 
-                        <div>
-                            <a href="#" class="btn btn-primary">Edit</a>
+                        <div class="ex-actions">
+                            {{-- <a href="#" class="btn btn-primary">Edit</a> --}}
                             <form action="{{ route('exhibition.delete', $schedule->exhibition->id) }}" method="POST"
                                 style="display:inline;">
                                 @csrf

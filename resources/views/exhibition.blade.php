@@ -32,8 +32,8 @@
                 <p>Maximum number of tickets: {{ $schedule->exhibition->max_tickets }}</p>
                 <p>Organizer: {{ $schedule->exhibition->user->name }}</p>
                 <p>Direction: {{ $schedule->exhibition->direction->name }}</p>
-                <p>Date added: {{ $schedule->exhibition->created_at }}</p>
-                <p>Last update: {{ $schedule->exhibition->updated_at }}</p>
+                <p>Start date: {{ $schedule->start_datetime }}</p>
+                <p>End date: {{ $schedule->end_datetime }}</p>
             </div>
         </div>
 
@@ -52,13 +52,20 @@
         <div id="ticketForm" style="display: none;">
             <form action="{{ route('buy_ticket') }}" method="POST">
                 @csrf
-                <h2>{{ $schedule->exhibition->name }}</h2>
-                <input type="hidden" name="exhibition_id" value="{{ $schedule->exhibition->id }}">
-                <label for="quantity">Count tickets</label>
-                <input type="number" id="quantity" name="quantity" min="1"
-                    max="{{ $schedule->exhibition->remaining_tickets }}">
-                <button type="submit">Buy</button>
-                <button type="button" id="closeForm">Close</button>
+                <div class="main">
+                    <h3>{{ $schedule->exhibition->name }}</h3>
+                    <input type="hidden" name="exhibition_id" value="{{ $schedule->exhibition->id }}">
+                    <label for="quantity">Count tickets</label>
+                    <input type="number" id="quantity" name="quantity" min="1"
+                        max="{{ $schedule->exhibition->remaining_tickets }}">
+                </div>
+
+                <p class="price">{{ $schedule->exhibition->ticket_price }}₽</p>
+
+                <div class="form-actions">
+                    <button type="submit">Buy</button>
+                    <button type="button" id="closeForm">Close</button>
+                </div>
             </form>
         </div>
 
