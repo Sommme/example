@@ -2,15 +2,21 @@
     display: flex;
     flex-direction: column;
     justify-content: left;
-    width: 100%;
 }
 
 .ticket {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 20px;
     margin-bottom: 10px;
     /* Отступ после линии */
     border-bottom: 1px solid #181913;
     /* Цвет линии */
+}
+
+.ticket .cover {
+    border-radius: 10px;
+    width: 240px;
+    height: 188px;
 }
