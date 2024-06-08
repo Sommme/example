@@ -11,6 +11,22 @@ class ExhibitionController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function get_welcome_index(){
+        $exhibitions = Exhibition::with(['schedules' => function ($query) {
+            $query->orderBy('start_datetime', 'asc');
+        }])->get();
+    
+        // Обновляем статус каждого расписания
+        foreach ($exhibitions as $exhibition) {
+            foreach ($exhibition->schedules as $schedule) {
+                $schedule->updateStatus();
+            }
+        }
+
+        return view('welcome', compact('exhibitions'));
+     }
+
     public function exhibitions_curator_index()
     {
         $user = Auth::user();
@@ -33,5 +49,21 @@ class ExhibitionController extends Controller
         }
 
         return redirect()->back()->with('error', 'You are not authorized to delete this exhibition.');
+    }
+
+    public function get_exhibitions()
+    {
+        $exhibitions = Exhibition::with(['schedules' => function ($query) {
+            $query->orderBy('start_datetime', 'asc');
+        }])->get();
+    
+        // Обновляем статус каждого расписания
+        foreach ($exhibitions as $exhibition) {
+            foreach ($exhibition->schedules as $schedule) {
+                $schedule->updateStatus();
+            }
+        }
+
+        return view('exhibitions', compact('exhibitions'));
     }
 }

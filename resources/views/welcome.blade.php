@@ -10,7 +10,29 @@
 @section('content')
 
     <div class="content">
-        <div class="main-exhibition">
+        @isset($exhibitions && $exhibitions->count() > 0)
+            @php
+                $mainExhibition = $exhibitions->shift();
+            @endphp
+
+            <div class="main-exhibition">
+                <div class="cover">
+                    <img src="{{ Storage::url($mainExhibition->photo) }}" alt="Exhibition photo">
+                    <div class="overlay"></div>
+                    <div class="main-exhibition-text">
+                        <h2>{{ $mainExhibition->name }}</h2>
+                        <div class="details">
+                            <p>{{ $mainExhibition->schedules->first()->status->name }}</p>
+                            <p>{{ $mainExhibition->schedules->first()->start_datetime }} ·
+                                {{ $mainExhibition->schedules->first()->end_datetime }}</p>
+                            <p>{{ $mainExhibition->address }}</p>
+                        </div>
+                        <a href="/exhibition/{{ $mainExhibition->id }}" class="btn">Buy a Ticket</a>
+                    </div>
+                </div>
+            </div>
+        @endisset
+        {{-- <div class="main-exhibition">
             <div class="cover">
                 <img src="{{ asset('assets/images/exhibition1.jpg') }}" alt="image">
 
@@ -28,7 +50,7 @@
                     <a href="#" class="btn">Buy a Ticket</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="exhibitions">
             <h3>future exhibitions</h3>
@@ -98,15 +120,6 @@
                     </div>
                 </a>
 
-            </div>
-
-            <div class="pagination">
-                <div class="page swipe">назад</div>
-                <div class="page">1</div>
-                <div class="page">2</div>
-                <div class="page">...</div>
-                <div class="page">10</div>
-                <div class="page swipe">вперед</div>
             </div>
         </div>
     </div>

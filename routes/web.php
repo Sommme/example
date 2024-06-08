@@ -21,9 +21,10 @@ Route::fallback(function () {
     return redirect()->route('/');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');;
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');;
+Route::get('/', [ExhibitionController::class, 'get_welcome_index'])->name('welcome');
 
 
 Route::get('/logout', [AuthController::class, 'logout']);
