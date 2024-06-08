@@ -55,4 +55,12 @@ class ExhibitController extends Controller
 
         return redirect()->route('new_exhibit.index')->with('success', 'Exhibit added successfully');
     }
+
+    public function get_exhibits()
+    {
+        $exhibits = Exhibit::with('user')->get();
+
+        return view('exhibits', compact('exhibits'));
+    }
+
 }

@@ -21,9 +21,10 @@ Route::fallback(function () {
     return redirect()->route('/');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');;
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('welcome');;
+Route::get('/', [ExhibitionController::class, 'get_welcome_index'])->name('welcome');
 
 
 Route::get('/logout', [AuthController::class, 'logout']);
@@ -41,9 +42,7 @@ Route::group(['middleware' => ['auth', 'role:curator']], function () {
     // });
     Route::get('/exhibitions_curator', [ExhibitionController::class, 'exhibitions_curator_index']);
 
-    Route::get('/exhibitions_curator_add', function () {
-        return view('exhibitions_curator_add');
-    });
+    Route::get('/exhibitions_curator_add', [ExhibitionController::class, 'exhibitions_add_index'])->name('exhibition_add.index');
     Route::delete('/exhibition/delete/{id}', [ExhibitionController::class, 'delete_exhibition'])->name('exhibition.delete');
 
     Route::get('/new_exhibit', [ExhibitController::class, 'new_exhibit_index'])->name('new_exhibit.index');

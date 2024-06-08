@@ -13,6 +13,22 @@ class ExhibitionController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function get_welcome_index(){
+        $exhibitions = Exhibition::with(['schedules' => function ($query) {
+            $query->orderBy('start_datetime', 'asc');
+        }])->get();
+    
+        // Обновляем статус каждого расписания
+        foreach ($exhibitions as $exhibition) {
+            foreach ($exhibition->schedules as $schedule) {
+                $schedule->updateStatus();
+            }
+        }
+
+        return view('welcome', compact('exhibitions'));
+     }
+
     public function exhibitions_curator_index()
     {
         $user = Auth::user();
@@ -21,9 +37,12 @@ class ExhibitionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function exhibitions_add_index(){
+        return view('exhibitions_curator_add');
+    }
     public function create(Request $request)
     {
-        /*$request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'ticket_price' => 'required|numeric|min:0',
@@ -32,7 +51,7 @@ class ExhibitionController extends Controller
             'direction' => 'required|integer',
             'start_date' => 'required|date|after:now',
             'end_date' => 'required|date|after:start_date',
-        ]);*/
+        ]);
 
         $exhibition = new Exhibition;
         if ($request->hasFile('photo')) {
@@ -61,7 +80,7 @@ class ExhibitionController extends Controller
 
         Schedule::saveData($data);
 
-        return redirect()->route('new_exhibition.index')->with('success', 'Exhibition added successfully');
+        return redirect()->route('exhibition_add.index')->with('success', 'Exhibition added successfully');
     }
 
     /**
@@ -90,5 +109,21 @@ class ExhibitionController extends Controller
         }
 
         return redirect()->back()->with('error', 'You are not authorized to delete this exhibition.');
+    }
+
+    public function get_exhibitions()
+    {
+        $exhibitions = Exhibition::with(['schedules' => function ($query) {
+            $query->orderBy('start_datetime', 'asc');
+        }])->get();
+    
+        // Обновляем статус каждого расписания
+        foreach ($exhibitions as $exhibition) {
+            foreach ($exhibition->schedules as $schedule) {
+                $schedule->updateStatus();
+            }
+        }
+
+        return view('exhibitions', compact('exhibitions'));
     }
 }
